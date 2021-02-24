@@ -46,14 +46,6 @@ class ShareResource{
 
     public synchronized void increase(){
 
-        lock.lock();
-        try {
-
-
-        } finally {
-            lock.unlock();
-        }
-
         //判断
         while (num==1){
             try {
@@ -72,7 +64,6 @@ class ShareResource{
     }
 
     public synchronized void decrease(){
-
 
         //判断
         while (num==0){

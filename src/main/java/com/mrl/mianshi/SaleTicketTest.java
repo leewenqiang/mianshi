@@ -40,15 +40,21 @@ public class SaleTicketTest {
         Ticket ticket = new Ticket(100);
         executorService1.execute(() -> {
             while (true) {
-                ticket.saleTicket(Thread.currentThread().getName(), 1);
+               // ticket.saleTicket(Thread.currentThread().getName(), 1);
+
+                ticket.saleTicket();
             }
         });
 
-        executorService2.execute(() -> {
-            while (true) {
-                ticket.prouduceTicket(1, 200);
-            }
-        });
+//        executorService2.execute(() -> {
+//            while (true) {
+//                ticket.prouduceTicket(1, 200);
+//            }
+//        });
+
+
+
+
 
 
        /* //30张票 资源类
@@ -80,6 +86,7 @@ public class SaleTicketTest {
         },"售票员B");
         thread3.start();*/
 
+
     }
 }
 
@@ -103,11 +110,23 @@ class Ticket {
         this.num = num;
     }
 
+
+    public synchronized void saleTicket(){
+        if(num==0){
+           // System.out.println("票已卖完...");
+        }else{
+            System.out.println(Thread.currentThread().getName()+"卖出票,票号"+num--);
+        }
+    }
+
+
     /**
      * 卖票方法
      */
     public void saleTicket(String name, Integer saleNum) {
 
+
+        // 加锁 lock 或者 synchronized块
         lock.lock();
         try {
 
