@@ -42,7 +42,7 @@ public class SaleTicketTest {
             while (true) {
                // ticket.saleTicket(Thread.currentThread().getName(), 1);
 
-                ticket.saleTicket();
+                ticket.saleTicket2();
             }
         });
 
@@ -117,6 +117,20 @@ class Ticket {
         }else{
             System.out.println(Thread.currentThread().getName()+"卖出票,票号"+num--);
         }
+    }
+
+    public  void saleTicket2(){
+        lock.lock();
+        try {
+            if(num==0){
+                // System.out.println("票已卖完...");
+            }else{
+                System.out.println(Thread.currentThread().getName()+"卖出票,票号"+num--);
+            }
+        } finally {
+            lock.unlock();
+        }
+
     }
 
 
